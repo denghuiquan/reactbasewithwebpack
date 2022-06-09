@@ -1,0 +1,8 @@
+@import './bgbutton.css';
+@import './bgbutton.less';
+@import './test.css';
+
+.lg-icon {
+    font-size: 48px;
+    color: red;
+}
