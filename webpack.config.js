@@ -7,14 +7,22 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 module.exports = {
     mode: 'development',
+    devtool: 'cheap-module-source-map', 
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/main.js'
     },
+    resolve: {
+        extensions: ['.js', '.json', '.jsx', '.ts', '.vue'],
+        alias: {
+            '@': path.resolve(__dirname, 'src')  // 允许使用别名访问src目录下的文件避免./这样的相对路径写法,避免多层级目录访问的回退查找错误，从而统一对是src下资源的访问方式。例如： 以前访问'./js/utils.js'就可以使用'@/js/utils'
+        }
+    },
     target: 'web',
     devServer: {
-        hot: true
+        hot: true,
+        historyApiFallback: true
     },
     module: {
         rules: [

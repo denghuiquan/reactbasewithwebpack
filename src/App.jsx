@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import Image from './js/image.js'
-import BgButton from './js/bgbutton.js'
+import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
+import Image from '@/js/image.js'
+import BgButton from '@/js/bgbutton.js'
+import Home from '@/components/home.jsx'
+import About from '@/components/About.jsx'
 
-import utils from './js/utils.js'
-import Api from './js/api.js'
-import './js/font.js'
-import './css/index.css'
+import utils from '@/js/utils.js'
+import Api from '@/js/api.js'
+import '@/js/font.js'
+import '@/css/index.css'
 
 console.log(Api.getUserInfo(9527))
 console.log(Api.ajaxAsync('https://www.lookatme.com'))
@@ -22,6 +25,26 @@ class App extends Component {
     render() {
         return (
             <div>
+                <BrowserRouter>
+                    <div>
+                        <Link to={'/home'}>Home</Link>
+                    </div>
+                    <div>
+                        <Link to={'/about'}>About</Link>
+                    </div>
+
+                    <Routes>
+                        <Route path='/home' element={<Home />}></Route>
+                        <Route path='/about' element={<About />}></Route>
+                    </Routes>
+                </BrowserRouter>
+
+                <div>
+                    <a href={'/home'}>Home</a>
+                </div>
+                <div>
+                    <a href={'/about'}>About</a>
+                </div>
                 <h2>{this.state.title}</h2>
                 {this.props.rendered &&
                     <p>{'the App dom is rendered'}</p>

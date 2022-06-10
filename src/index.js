@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 console.log('React App with webpack')
-import title from './js/title.js'
+import title from '@/js/title'
 console.log(title)
-import App from './App.jsx'
+import App from '@/App'
 
 if (module.hot) {
     module.hot.accept([

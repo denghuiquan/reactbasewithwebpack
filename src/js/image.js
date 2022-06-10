@@ -1,5 +1,5 @@
 import React from 'react'
-import image07 from '../img/07-数据存取.png'
+import image07 from '@/img/07-数据存取.png'
 
 console.log(image07)
 

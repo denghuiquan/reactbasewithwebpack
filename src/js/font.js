@@ -1,5 +1,5 @@
-import "../font/iconfont.css"
-import "../css/index.css"
+import "@/font/iconfont.css"
+import "@/css/index.css"
 
 function packFont() {
   // 01 创建一个容器元素
