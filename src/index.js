@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-console.log('React App with webpack')
 import title from '@/js/title'
-console.log(title)
 import App from '@/App'
+import axios from 'axios'
 
 if (module.hot) {
     module.hot.accept([
         './js/title.js'
-    ], (result) => {
-        console.log(`HMR working; ${result}`)
-    })
+    ])
 }
 
 // ReactDOM.render(<App />, document.getElementById('app'))
@@ -27,14 +24,17 @@ function AppWithCallbackAfterRender(state) {
     useEffect(() => {
         setTimeout(() => {
             setRendered(true) // 设置状态rendered为true
-            console.log('after: ', rendered)
             document.title = title + ` rendered=${rendered}`
         }, 2000)
     })
 
-    console.log('before: ', rendered)
     return <App rendered={rendered} tab="home" />
 }
 const container = document.getElementById('app')
 const root = createRoot(container) // createRoot(container!) if you use TypeScript
 root.render(<AppWithCallbackAfterRender />)
+axios.get('/api/users/denghuiquan').then(result => {
+    console.log(result, '<-----github.com users api result-----')
+}).catch(err => {
+    console.log(err.message)
+})
