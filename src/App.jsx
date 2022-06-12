@@ -34,20 +34,24 @@ class App extends Component {
                     </div>
 
                     <Routes>
+                        <Route path='/' element={<Home />}></Route>
                         <Route path='/home' element={<Home />}></Route>
                         <Route path='/about' element={<About />}></Route>
                     </Routes>
                 </BrowserRouter>
-
-                <div>
-                    <a href={'/home'}>Home</a>
-                </div>
-                <div>
-                    <a href={'/about'}>About</a>
-                </div>
                 <h2>{this.state.title}</h2>
                 {this.props.rendered &&
-                    <p>{'the App dom is rendered'}</p>
+                    <div>
+                        <p>the App dom is rendered</p>
+                        <ul>
+                            {Object.keys(this.props.userData).map((key) => {
+                                const value = this.props.userData[key]
+                                return (value && <li key={key.toString()}>
+                                    <code>{`${key}: ${value}`}</code>
+                                </li>)
+                            })}
+                        </ul>
+                    </div>
                 }
                 <BgButton />
                 <Image />
