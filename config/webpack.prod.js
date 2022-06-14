@@ -7,9 +7,10 @@ const PurgeCSSPlugin = require('purgecss-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const InlineChunkHtmlPlugin = require('inline-chunk-html-plugin')
-
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const glob = require('glob')
-// const webpack = require('webpack')
+const webpack = require('webpack')
+
 const resolveAppPath = require('./paths')
 
 module.exports = {
@@ -39,9 +40,10 @@ module.exports = {
             ]
         }),
         new MiniCssExtractPlugin({
-            filename: './css/[name].[contenthash:8].css'
+            filename: 'css/[name].[contenthash:8].css',
+            // chunkFilename: 'css/chunk.[id].css'
         }),
-        // new webpack.optimize.ModuleConcatenationPlugin() // about scope hositing 作用域提升
+        // new webpack.optimize.ModuleConcatenationPlugin(), // about scope hositing 作用域提升
         new PurgeCSSPlugin({
             paths: glob.sync(`${resolveAppPath('./src')}/**/*`, { nodir: true }), // css tree shaking file paths
             safelist: function () {
@@ -54,6 +56,8 @@ module.exports = {
             // threshold: 10000, 需要达到一定的文件大小才会被压缩，使用默认值进行了，不需要配置
             algorithm: 'gzip', // 设置使用的压缩算法
         }),
-        new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime.*\.js/])
+        new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime.*\.js/]),
+        // new BundleAnalyzerPlugin() // 可用于分析打包的内容文件大小等基本信息
+        // new webpack.debug.ProfilingPlugin() // 未能使用，估计又是版本问题
     ]
 }

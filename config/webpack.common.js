@@ -5,8 +5,8 @@ const { merge } = require('webpack-merge')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
-const smp = new SpeedMeasurePlugin()
+// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+// const smp = new SpeedMeasurePlugin()
 
 // 导入其他配置文件信息
 const prodConfig = require('./webpack.prod')
@@ -43,14 +43,14 @@ const commonConfig = (isProduction) => {
         optimization: {
             runtimeChunk: true,
             chunkIds: 'deterministic',
-            /* minimize: true,
+            minimize: true,
             minimizer: [
                 // 去除LiLICLICENSE.txt文件
                 new TerserWebpackPlugin({
                     extractComments: false
                 }),
                 new CssMinimizerPlugin() // 对css文件代码进行压缩
-            ], */
+            ],
             /* splitChunks: {
                 chunks: 'all',   // 默认是async,仅为异步导入分包；initial 可以处理同步导入的分包；all则比较强大，无论同步引入还是异步引入他都可以作用。一般项目里都比较简单粗暴使用all就可以了
                 minSize: 20000,
@@ -103,6 +103,7 @@ const commonConfig = (isProduction) => {
                                 esModule: false
                             }
                         },
+                        // 'css-loader',
                         'postcss-loader',
                         'less-loader'
                     ]
@@ -111,7 +112,9 @@ const commonConfig = (isProduction) => {
                     test: /\.(png|jpe?g|svg|gif)$/,
                     type: 'asset',
                     generator: {
-                        filename: 'img/[name].[hash:8][ext]'
+                        filename: '[name].[hash:8][ext]',
+                        publicPath: '../img/',
+                        outputPath: 'img/',
                     },
                     parser: {
                         dataUrlCondition: {
@@ -123,7 +126,9 @@ const commonConfig = (isProduction) => {
                     test: /\.(ttf|woff2?)$/,
                     type: 'asset/resource',
                     generator: {
-                        filename: 'font/[name].[hash:8][ext]'
+                        filename: '[name].[hash:3][ext]',
+                        publicPath: '../font/',
+                        outputPath: 'font/',
                     }
                 },
                 {
@@ -165,9 +170,9 @@ module.exports = (env) => {
     const config = isProduction ? prodConfig : devConfig
     // 返回合并后的配置信息
     const mergedConfig = merge(commonConfig(isProduction), config)
-    console.log('wrap 前-------->\n', mergedConfig.plugins)
-    const wrappedConfig = smp.wrap(mergedConfig)
-    console.log('wrap 后-------->\n', wrappedConfig.plugins)
-    // return mergedConfig
-    return smp.wrap(mergedConfig)
+    // console.log('wrap 前-------->\n', mergedConfig.plugins)
+    // const wrappedConfig = isProduction ? smp.wrap(mergedConfig) : mergedConfig
+    // console.log('wrap 后-------->\n', wrappedConfig.plugins)
+    return mergedConfig
+    // return wrappedConfig
 }
