@@ -1,5 +1,5 @@
-import "@/css/bgbutton.less"
-import "@/css/bgbutton.css"
+// import "@/css/bgbutton.less"
+// import "@/css/bgbutton.css"
 import React, { Component } from 'react'
 
 class BgButton extends Component {

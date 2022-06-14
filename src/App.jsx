@@ -8,7 +8,7 @@ import About from '@/components/About.jsx'
 import utils from '@/js/utils.js'
 import Api from '@/js/api.js'
 import '@/js/font.js'
-import '@/css/index.css'
+// import '@/css/index.css'
 
 console.log(Api.getUserInfo(9527))
 console.log(Api.ajaxAsync('https://www.lookatme.com'))

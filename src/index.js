@@ -5,6 +5,20 @@ import App from '@/App'
 import axios from 'axios'
 import { async } from 'regenerator-runtime'
 
+import './css/index.less'
+
+// 静态导入测试
+// import 'jquery'
+// import 'lodash'
+
+// import动态导入测试
+// import('jquery')
+// import('lodash')
+import(/*webpackChunkName: "title"*/
+/* webpackPreload: true */
+'./js/title')
+console.log(_.join(['hello','world'], ' '))
+
 if (module.hot) {
     module.hot.accept([
         './js/title.js'
