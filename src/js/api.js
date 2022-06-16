@@ -1,7 +1,7 @@
 export const getUserInfo = id => {
   return {
     uid: id,
-    name: "hello huiquan"
+    name: 'hello huiquan'
   }
 }
 

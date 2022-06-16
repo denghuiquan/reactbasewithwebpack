@@ -5,6 +5,7 @@ const { merge } = require('webpack-merge')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const EslintWebpackPlugin = require('eslint-webpack-plugin')
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 // const smp = new SpeedMeasurePlugin()
 
@@ -135,10 +136,17 @@ const commonConfig = (isProduction) => {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: ['babel-loader']
-                }
+                },
+                /* {
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    use: ['eslint-loader'], // 网友错误经验，eslint已经弃用loader的机制了，使用plugins
+                    enforce: 'pre'
+                } */
             ]
         },
         plugins: [
+            new EslintWebpackPlugin({ fix: true }),
             new HtmlWebpackPlugin({
                 title: 'React App built with WebPack',
                 template: './public/index.html'

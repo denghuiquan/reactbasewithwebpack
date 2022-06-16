@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 class BgButton extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       h2: 'Tell webpack that Button.js uses these styles',
@@ -12,12 +12,14 @@ class BgButton extends Component {
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this)
   }
-  handleClick() {
+
+  handleClick () {
     this.setState(prevState => ({
-      className: prevState.className == 'bgBoxSmaller' ? 'bgBox' : 'bgBoxSmaller'
+      className: prevState.className === 'bgBoxSmaller' ? 'bgBox' : 'bgBoxSmaller'
     }))
   }
-  render() {
+
+  render () {
     return (
       <div>
         <div className={this.state.className}>

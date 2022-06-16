@@ -1,11 +1,11 @@
 // import "@/font/iconfont.css"
 // import "@/css/index.css"
 
-function packFont() {
+function packFont () {
   // 01 创建一个容器元素
-  const oEle = document.createElement("div")
-  const sp = document.createElement("span")
-  sp.className = "iconfont icon-linggan lg-icon"
+  const oEle = document.createElement('div')
+  const sp = document.createElement('span')
+  sp.className = 'iconfont icon-linggan lg-icon'
   oEle.appendChild(sp)
 
   return oEle
